@@ -1,0 +1,3 @@
+SCardStatus : get ATR etc
+convert all contact with JNA Datatypes to Java, e.g. disposition Constants
+   as enums instead of NativeLong Constants

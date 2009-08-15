@@ -1,0 +1,4 @@
+*.swp
+TEST*
+build/
+dist/

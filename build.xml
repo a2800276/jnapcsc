@@ -6,6 +6,7 @@
 <property file="build.properties"/>
 
 <property name="src.dir" value="src/java"/>
+<property name="test.dir" value="test/java"/>
 <property name="build.dir" value="build"/>
 <property name="classes.dir" value="build/classes"/>
 <property name="assemble.dir" value="build/assemble"/>
@@ -46,20 +47,48 @@
           classpathref="classpath.path"/>
 </target>
 
+<target name="compile_test" depends="compile">
+	<javac  srcdir="${test.dir}" 
+          destdir="${classes.dir}" 
+          classpathref="classpath.path"/>
+</target>
+
+
 <target name="jar" depends="compile">
 	<copy todir="${assemble.dir}">
 		<fileset dir="${classes.dir}"/>
 	</copy>
-	<jar basedir="${assemble.dir}" destfile="${dist_dir}/${ant.project.name}.jar"/>
+	<jar basedir="${assemble.dir}" destfile="${dist.dir}/${ant.project.name}.jar"/>
 </target>
 
 <target name="run" depends="jar">
-	<echo message="don't know how to run"/>
+	<echo message="Trying to run when I can't even walk ..."/>
+	<java classname="de.kuriositaet.pcsc.Card">
+		<classpath>
+			<pathelement location="${dist.dir}/${ant.project.name}.jar"/>
+			<path refid="classpath.path"/>
+		</classpath>
+	</java>
+	
 </target>
 
 <target name="doc">
 	<javadoc sourcepath="${src.dir}" destdir="${doc.dir}"  classpath="${classpath}">
 	</javadoc>
+</target>
+
+<target name="test" depends="compile_test">
+	<echo message="HERE"/>
+	<junit  fork="yes" printsummary="yes">
+	  <formatter type="plain"/>
+		<classpath>
+			<path refid="classpath.path"/>
+		</classpath>
+
+		<test name="de.kuriositaet.pcsc.test.TestContext"/>
+		<test name="de.kuriositaet.pcsc.test.TestPCSC_FFI"/>
+		<test name="de.kuriositaet.pcsc.test.UtilTest"/>	
+	</junit>
 </target>
 
 </project>
