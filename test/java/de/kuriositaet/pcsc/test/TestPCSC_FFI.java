@@ -11,7 +11,7 @@ import com.sun.jna.NativeLong;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.NativeLongByReference;
 
-import de.kuriositaet.pcsc.Constants;
+import de.kuriositaet.pcsc.ffi.Constants;
 import de.kuriositaet.pcsc.ffi.PCSC_FFI;
 
 public class TestPCSC_FFI {

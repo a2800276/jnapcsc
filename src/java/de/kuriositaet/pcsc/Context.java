@@ -5,6 +5,7 @@ import com.sun.jna.NativeLong;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.NativeLongByReference;
 
+import de.kuriositaet.pcsc.ffi.Constants;
 import de.kuriositaet.pcsc.ffi.PCSC_FFI;
 
 public class Context extends PCSCBase {
@@ -22,7 +23,11 @@ public class Context extends PCSCBase {
 	 * wraps SCardEstablishContext
 	 */
 	public Context () {
-		this(Constants.SCARD_SCOPE_SYSTEM);
+		this(Scope.SYSTEM);
+	}
+	
+	public Context(Scope scope) {
+		this(Constants.mapScope(scope));
 	}
 	
 	/**
@@ -30,7 +35,7 @@ public class Context extends PCSCBase {
 	 * wraps SCardEstablishContext
 	 * @param scope Scope constant from Constants
 	 */
-	public Context (NativeLong scope) {
+	private Context (NativeLong scope) {
 		in("Context()");
 		NativeLong err = ffi.SCardEstablishContext(
 				scope, 

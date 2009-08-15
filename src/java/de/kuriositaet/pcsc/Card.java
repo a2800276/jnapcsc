@@ -1,9 +1,13 @@
 package de.kuriositaet.pcsc;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.sun.jna.Memory;
 import com.sun.jna.NativeLong;
 import com.sun.jna.ptr.NativeLongByReference;
 
+import de.kuriositaet.pcsc.ffi.Constants;
 import de.kuriositaet.pcsc.ffi.PCSC_FFI;
 
 /**
@@ -38,8 +42,7 @@ public class Card extends PCSCBase {
 	private NativeLongByReference card = new NativeLongByReference();
 	private NativeLongByReference proto = new NativeLongByReference();
 	private boolean connected;
-	private NativeLong shareMode;
-	private NativeLong pref_protocol;
+	private ShareMode shareMode;
 	private boolean txInProgress;
 
 	/**
@@ -48,13 +51,44 @@ public class Card extends PCSCBase {
 	 * disconnect is called.
 	 */
 	private boolean hasOwnContext;
+
+	private Protocol protocol;
 	
 	/**
 	 * Return the JNA handle of this card.
 	 * @return the JNA handle representing this card
 	 */
-	protected NativeLong getNativeCard() {
+	private NativeLong getNativeCard() {
 		return this.card.getValue();
+	}
+	
+	/**
+	 * Connect to a card with parameters provided in the map argument.
+	 * 
+	 * @param map
+	 * @see CardOptions
+	 */
+	public Card(Map<CardOptions, Object> map){
+		if (map.containsKey(CardOptions.CONTEXT)){
+			this.ctx = (Context) map.get(CardOptions.CONTEXT);
+		} else {
+			this.ctx = new Context();
+			this.hasOwnContext = true;
+		}
+		
+		this.reader    = map.containsKey(CardOptions.READER) 
+					     ? (String)map.get(CardOptions.READER) 
+					     : this.ctx.listReaders()[0];
+		
+		this.protocol  = map.containsKey(CardOptions.PROTOCOL)
+		                 ? (Protocol) map.get(CardOptions.PROTOCOL)
+						 : Protocol.T0_T1;
+		                
+		this.shareMode = map.containsKey(CardOptions.SHARE_MODE)
+						 ? (ShareMode)map.get(CardOptions.SHARE_MODE)
+						 : ShareMode.EXCLUSIVE;
+		
+		establishConnection();
 	}
 	
 	/**
@@ -64,15 +98,15 @@ public class Card extends PCSCBase {
 	 * @throws PCSCException
 	 */
 	public Card () {
-		this.ctx = new Context();
-		this.hasOwnContext = true;
-		this.reader = ctx.listReaders()[0];
-		establishConnection();
+		this(new HashMap<CardOptions, Object>());
 	}
+	
+	
 	
 	/**
 	 * Establish a connection to this card using the specified Context.
 	 * @param ctx
+	 * @throws PCSCException
 	 */
 	public Card (Context ctx) {
 		this(ctx,null);
@@ -83,10 +117,13 @@ public class Card extends PCSCBase {
 	 * using the provided Context.
 	 * @param ctx
 	 * @param reader
+	 * @throws PCSCException
 	 */
 	public Card (Context ctx, String reader) {
 		this.reader = reader != null ? reader : ctx.listReaders()[0];
 		this.ctx    = ctx;
+		this.protocol = Protocol.T0_T1;
+		this.shareMode = ShareMode.EXCLUSIVE;
 		establishConnection();
 	}
 
@@ -94,16 +131,14 @@ public class Card extends PCSCBase {
 	 * Internal method to call SCardConnect
 	 */
 	private void establishConnection() {
-		this.shareMode = Constants.SCARD_SHARE_EXCLUSIVE;
-		this.pref_protocol = Constants.SCARD_PROTOCOL_T0;
 		
 		NativeLong result = ffi.SCardConnect(
 				this.ctx.getNativeContext(), 
 				//new NativeLong(0),
 				this.reader,
 				//"",
-				this.shareMode, 
-				this.pref_protocol,
+				Constants.mapShareMode(this.shareMode), 
+				Constants.mapProtocol(this.protocol),
 				card, 
 				proto);
 		m(Stringifier.stringify(result));
@@ -116,7 +151,7 @@ public class Card extends PCSCBase {
 	 * Disconnect the Card
 	 * @param disposition one of the disposition constants from Constants.
 	 */
-	public void disconnect(NativeLong disposition) {
+	private void disconnect(NativeLong disposition) {
 		if (!connected){
 			return;
 		}
@@ -131,6 +166,10 @@ public class Card extends PCSCBase {
 		
 		this.checkResult("Card.disconnect()", result);
 		
+		if (this.hasOwnContext){
+			this.ctx.release();
+		}
+		
 		connected = false;
 	}
 	
@@ -138,7 +177,16 @@ public class Card extends PCSCBase {
 	 * Disconnect the card with the disposition SCARD_UNPOWER_CARD
 	 */
 	public void disconnect () {
-		disconnect(Constants.SCARD_UNPOWER_CARD);
+		disconnect(Disposition.UNPOWER_CARD);
+	}
+	
+	/**
+	 * Disconnect the Card
+	 * @param disposition one of the Disposition enums.
+	 * @see Disposition
+	 */
+	public void disconnect(Disposition disposition){
+		disconnect(Constants.mapDisposition(disposition));
 	}
 	
 	/**
@@ -147,15 +195,11 @@ public class Card extends PCSCBase {
 	public void reconnect () {
 		NativeLong result = ffi.SCardReconnect(
 				this.getNativeCard(), 
-				this.shareMode, 
-				this.pref_protocol, 
-				Constants.SCARD_UNPOWER_CARD,
+				Constants.mapShareMode(this.shareMode), 
+				Constants.mapProtocol(this.protocol), 
+				Constants.SCARD_RESET_CARD,
 				this.proto);
-		this.checkResult("Card.reconnect()", result);
-		
-		if (this.hasOwnContext){
-			this.ctx.release();
-		}
+		this.checkResult("Card.reconnect()", result);	
 	}
 	
 	/**
@@ -287,4 +331,6 @@ public class Card extends PCSCBase {
 		}//finally
 		System.out.println("done");
 	}
+	
 }
+

@@ -3,9 +3,6 @@ package de.kuriositaet.pcsc.test;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.sun.jna.NativeLong;
-
-
 import de.kuriositaet.pcsc.Context;
 
 
@@ -22,7 +19,7 @@ public class TestContext {
 	@Test
 	public void testListReaderGroups() {
 		Context c = new Context();
-		System.out.println("Native Long.size"+NativeLong.SIZE);
+		//System.out.println("Native Long.size"+NativeLong.SIZE);
 		//c.listReaderGroups();
 		c.listReaders();
 		c.release();

@@ -77,7 +77,11 @@
 </target>
 
 <target name="doc">
-	<javadoc sourcepath="${src.dir}" destdir="${doc.dir}"  classpath="${classpath}" Overview="overview.html">
+	<javadoc sourcepath="${src.dir}" 
+					 destdir="${doc.dir}"  
+					 classpath="${classpath}" 
+					 Overview="overview.html"
+					 access="package">
 		<classpath>
 			<path refid="classpath.path"/>
 		</classpath>

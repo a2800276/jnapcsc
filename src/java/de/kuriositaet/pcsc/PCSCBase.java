@@ -2,6 +2,8 @@ package de.kuriositaet.pcsc;
 
 import com.sun.jna.NativeLong;
 
+import de.kuriositaet.pcsc.ffi.Constants;
+
 /**
  * This class provides some base functionality common to the classes
  * calling the PCSC interface.
