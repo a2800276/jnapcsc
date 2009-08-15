@@ -6,6 +6,30 @@ import com.sun.jna.ptr.NativeLongByReference;
 
 import de.kuriositaet.pcsc.ffi.PCSC_FFI;
 
+/**
+ * This class represents a smart card in a reader. It contains functionality
+ * to establish and free connections to a card and to send and receive data.
+ * 
+ * Basically communicating to a smartcard is as follows:
+ * <pre>
+ *  Card card;
+ *  bytes [] answer;
+ *  try {
+ *  	answer = card.transmit(someBytes);
+ *  	doSomething(answer);
+ *  }
+ *  finally {
+ *  	if (card != null) {
+ *  		card.disconnect();
+ *  	}
+ *  }
+ * </pre>
+ * 
+ * Note that all actions taken with card <i>may</i> throw an unchecked 
+ * PCSCException that you would handle in a catch clause...
+ * @author tbe
+ *
+ */
 public class Card extends PCSCBase {
 	PCSC_FFI ffi = PCSC_FFI.INSTANCE;
 	
@@ -18,19 +42,26 @@ public class Card extends PCSCBase {
 	private NativeLong pref_protocol;
 	private boolean txInProgress;
 
+	/**
+	 * Indicates whether the Card was instantiated with a passed in Context
+	 * or not, i.e. whether we'll need to dispose of the Context when
+	 * disconnect is called.
+	 */
 	private boolean hasOwnContext;
 	
 	/**
 	 * Return the JNA handle of this card.
-	 * @return
+	 * @return the JNA handle representing this card
 	 */
 	protected NativeLong getNativeCard() {
 		return this.card.getValue();
 	}
 	
 	/**
-	 * Establish a connection to a card using an own Context 
+	 * Establish a connection to a card using an internally managed Context 
 	 * and using the first Reader returned by Context.listReaders()
+	 * 
+	 * @throws PCSCException
 	 */
 	public Card () {
 		this.ctx = new Context();

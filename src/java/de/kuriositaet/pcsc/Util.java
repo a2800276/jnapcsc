@@ -12,7 +12,7 @@ public class Util {
 	/**
 	 * Provides a more readable version of an error returned by PCSC.
 	 * @param err
-	 * @return
+	 * @return a string description of the encountered error
 	 */
 	public static String stringifyError(NativeLong err) {
 		PCSC_FFI ffi = PCSC_FFI.INSTANCE;
@@ -20,12 +20,13 @@ public class Util {
 	}
 	/**
 	 * Provides a more readable version of an error returned by PCSC.
+	 * @return a string description of the encountered error
 	 */
 	public static String stringifyError(long err) {
 		NativeLong l = new NativeLong(err);
 		return stringifyError(l);
 	}
-	public static final String [] CAST = {};
+	private static final String [] CAST = {};
 	
 	/**
 	 * Utility to convert JNA Memory into an array of Strings.
@@ -40,7 +41,7 @@ public class Util {
 	 * 
 	 * 	{"one", "two", "three"}
 	 * @param mem
-	 * @return
+	 * @return the passed-in bytes converted to a String array
 	 */
 	public static String[] memToStringArray(Memory mem){
 		ArrayList<String> results = new ArrayList<String>();
@@ -68,7 +69,7 @@ public class Util {
 	/**
 	 * Returns a String (hex) representation of the passed in byte array.
 	 * @param arr
-	 * @return
+	 * @return a hex representation of the provided bytes.
 	 */
 	public static String binToHex(byte [] arr) {
 		StringBuilder sb = new StringBuilder();
@@ -80,8 +81,8 @@ public class Util {
 	}
 	/**
 	 * Returns a String (hex) representation of the passed memory.
-	 * @param arr
-	 * @return
+	 * @param m 
+	 * @return a hex representation of the provided memory
 	 */
 	public static String binToHex(Memory m) {
 		return binToHex(memToByte(m));
@@ -90,7 +91,7 @@ public class Util {
 	/**
 	 * Converts the JNA Memory passed in into a byte array.
 	 * @param m
-	 * @return
+	 * @return the bytes from the JNA memory
 	 */
 	public static byte[] memToByte(Memory m) {
 		byte [] arr = new byte[(int) m.getSize()];
