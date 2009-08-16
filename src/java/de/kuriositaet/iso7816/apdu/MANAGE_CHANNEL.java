@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class MANAGE_CHANNEL extends APDU {
 	public MANAGE_CHANNEL () {
 		super("MANAGE CHANNEL", (byte)0x00, (byte)0x70);
-  }
+	}
 }

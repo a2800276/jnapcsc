@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class GET_RESPONSE extends APDU {
 	public GET_RESPONSE () {
 		super("GET RESPONSE", (byte)0x00, (byte)0xC0);
-  }
+	}
 }

@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class DISABLE_VERIFICATION_REQUIREMENT extends APDU {
 	public DISABLE_VERIFICATION_REQUIREMENT () {
 		super("DISABLE VERIFICATION REQUIREMENT", (byte)0x00, (byte)0x26);
-  }
+	}
 }

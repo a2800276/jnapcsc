@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class EXTERNAL_MUTUAL_AUTHENTICATE extends APDU {
 	public EXTERNAL_MUTUAL_AUTHENTICATE () {
 		super("EXTERNAL (/ MUTUAL) AUTHENTICATE", (byte)0x00, (byte)0x82);
-  }
+	}
 }

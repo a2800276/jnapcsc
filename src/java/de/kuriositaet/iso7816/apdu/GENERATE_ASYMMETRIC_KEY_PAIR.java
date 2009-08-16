@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class GENERATE_ASYMMETRIC_KEY_PAIR extends APDU {
 	public GENERATE_ASYMMETRIC_KEY_PAIR () {
 		super("GENERATE ASYMMETRIC KEY PAIR", (byte)0x00, (byte)0x46);
-  }
+	}
 }

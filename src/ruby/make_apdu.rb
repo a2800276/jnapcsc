@@ -19,7 +19,7 @@ import de.kuriositaet.iso7816.APDU;
 public class %s extends APDU {
 	public %s () {
 		super("%s", (byte)0x00, (byte)0x%s);
-  }
+	}
 }
 END
 

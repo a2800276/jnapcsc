@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class UPDATE_BINARY extends APDU {
 	public UPDATE_BINARY () {
 		super("UPDATE BINARY", (byte)0x00, (byte)0xD6);
-  }
+	}
 }

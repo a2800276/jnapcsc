@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class PERFORM_SECURITY_OPERATION extends APDU {
 	public PERFORM_SECURITY_OPERATION () {
 		super("PERFORM SECURITY OPERATION", (byte)0x00, (byte)0x2A);
-  }
+	}
 }

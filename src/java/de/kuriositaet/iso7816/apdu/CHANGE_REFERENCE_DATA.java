@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class CHANGE_REFERENCE_DATA extends APDU {
 	public CHANGE_REFERENCE_DATA () {
 		super("CHANGE REFERENCE DATA", (byte)0x00, (byte)0x24);
-  }
+	}
 }

@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class TERMINATE_DF extends APDU {
 	public TERMINATE_DF () {
 		super("TERMINATE DF", (byte)0x00, (byte)0xE6);
-  }
+	}
 }

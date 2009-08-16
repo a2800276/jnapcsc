@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class ERASE_RECORD_S extends APDU {
 	public ERASE_RECORD_S () {
 		super("ERASE RECORD (S)", (byte)0x00, (byte)0x0C);
-  }
+	}
 }

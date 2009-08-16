@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class INTERNAL_AUTHENTICATE extends APDU {
 	public INTERNAL_AUTHENTICATE () {
 		super("INTERNAL AUTHENTICATE", (byte)0x00, (byte)0x88);
-  }
+	}
 }

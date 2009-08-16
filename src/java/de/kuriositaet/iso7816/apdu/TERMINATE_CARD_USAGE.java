@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class TERMINATE_CARD_USAGE extends APDU {
 	public TERMINATE_CARD_USAGE () {
 		super("TERMINATE CARD USAGE", (byte)0x00, (byte)0xFE);
-  }
+	}
 }

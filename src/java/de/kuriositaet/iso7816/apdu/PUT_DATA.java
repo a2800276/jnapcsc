@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class PUT_DATA extends APDU {
 	public PUT_DATA () {
 		super("PUT DATA", (byte)0x00, (byte)0xDA);
-  }
+	}
 }

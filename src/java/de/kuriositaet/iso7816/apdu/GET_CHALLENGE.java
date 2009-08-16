@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class GET_CHALLENGE extends APDU {
 	public GET_CHALLENGE () {
 		super("GET CHALLENGE", (byte)0x00, (byte)0x84);
-  }
+	}
 }

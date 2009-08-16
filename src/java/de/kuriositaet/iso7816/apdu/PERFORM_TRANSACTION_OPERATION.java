@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class PERFORM_TRANSACTION_OPERATION extends APDU {
 	public PERFORM_TRANSACTION_OPERATION () {
 		super("PERFORM TRANSACTION OPERATION", (byte)0x00, (byte)0x12);
-  }
+	}
 }

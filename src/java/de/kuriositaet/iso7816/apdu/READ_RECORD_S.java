@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class READ_RECORD_S extends APDU {
 	public READ_RECORD_S () {
 		super("READ RECORD (S)", (byte)0x00, (byte)0xB2);
-  }
+	}
 }

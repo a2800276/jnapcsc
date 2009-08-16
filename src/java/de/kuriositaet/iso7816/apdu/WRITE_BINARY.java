@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class WRITE_BINARY extends APDU {
 	public WRITE_BINARY () {
 		super("WRITE BINARY", (byte)0x00, (byte)0xD0);
-  }
+	}
 }

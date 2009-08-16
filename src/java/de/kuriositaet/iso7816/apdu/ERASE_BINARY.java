@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class ERASE_BINARY extends APDU {
 	public ERASE_BINARY () {
 		super("ERASE BINARY", (byte)0x00, (byte)0x0E);
-  }
+	}
 }

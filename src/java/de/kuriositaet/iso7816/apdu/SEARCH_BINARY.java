@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class SEARCH_BINARY extends APDU {
 	public SEARCH_BINARY () {
 		super("SEARCH BINARY", (byte)0x00, (byte)0xA0);
-  }
+	}
 }

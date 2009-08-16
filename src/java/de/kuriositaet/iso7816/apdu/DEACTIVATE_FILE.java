@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class DEACTIVATE_FILE extends APDU {
 	public DEACTIVATE_FILE () {
 		super("DEACTIVATE FILE", (byte)0x00, (byte)0x04);
-  }
+	}
 }

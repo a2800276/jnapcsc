@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class PERFORM_SCQL_OPERATION extends APDU {
 	public PERFORM_SCQL_OPERATION () {
 		super("PERFORM SCQL OPERATION", (byte)0x00, (byte)0x10);
-  }
+	}
 }

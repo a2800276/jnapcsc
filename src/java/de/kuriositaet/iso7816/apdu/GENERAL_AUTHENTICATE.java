@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class GENERAL_AUTHENTICATE extends APDU {
 	public GENERAL_AUTHENTICATE () {
 		super("GENERAL AUTHENTICATE", (byte)0x00, (byte)0x86);
-  }
+	}
 }

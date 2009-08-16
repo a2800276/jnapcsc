@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class SEARCH_RECORD extends APDU {
 	public SEARCH_RECORD () {
 		super("SEARCH RECORD", (byte)0x00, (byte)0xA2);
-  }
+	}
 }

@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class PERFORM_USER_OPERATION extends APDU {
 	public PERFORM_USER_OPERATION () {
 		super("PERFORM USER OPERATION", (byte)0x00, (byte)0x14);
-  }
+	}
 }

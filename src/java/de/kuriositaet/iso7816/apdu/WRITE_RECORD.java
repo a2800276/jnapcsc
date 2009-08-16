@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class WRITE_RECORD extends APDU {
 	public WRITE_RECORD () {
 		super("WRITE RECORD", (byte)0x00, (byte)0xD2);
-  }
+	}
 }

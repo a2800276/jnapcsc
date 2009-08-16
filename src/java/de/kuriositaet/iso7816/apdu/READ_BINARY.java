@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class READ_BINARY extends APDU {
 	public READ_BINARY () {
 		super("READ BINARY", (byte)0x00, (byte)0xB0);
-  }
+	}
 }

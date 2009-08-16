@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class RESET_RETRY_COUNTER extends APDU {
 	public RESET_RETRY_COUNTER () {
 		super("RESET RETRY COUNTER", (byte)0x00, (byte)0x2C);
-  }
+	}
 }

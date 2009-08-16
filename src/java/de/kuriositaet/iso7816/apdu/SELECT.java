@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class SELECT extends APDU {
 	public SELECT () {
 		super("SELECT", (byte)0x00, (byte)0xA4);
-  }
+	}
 }

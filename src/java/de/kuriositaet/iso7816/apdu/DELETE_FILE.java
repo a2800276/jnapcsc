@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class DELETE_FILE extends APDU {
 	public DELETE_FILE () {
 		super("DELETE FILE", (byte)0x00, (byte)0xE4);
-  }
+	}
 }

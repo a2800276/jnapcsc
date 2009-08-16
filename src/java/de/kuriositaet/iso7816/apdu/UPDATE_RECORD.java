@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class UPDATE_RECORD extends APDU {
 	public UPDATE_RECORD () {
 		super("UPDATE RECORD", (byte)0x00, (byte)0xDC);
-  }
+	}
 }

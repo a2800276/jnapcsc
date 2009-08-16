@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class APPEND_RECORD extends APDU {
 	public APPEND_RECORD () {
 		super("APPEND RECORD", (byte)0x00, (byte)0xE2);
-  }
+	}
 }

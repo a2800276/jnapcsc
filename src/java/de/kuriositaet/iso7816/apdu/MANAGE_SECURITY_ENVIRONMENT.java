@@ -15,5 +15,5 @@ import de.kuriositaet.iso7816.APDU;
 public class MANAGE_SECURITY_ENVIRONMENT extends APDU {
 	public MANAGE_SECURITY_ENVIRONMENT () {
 		super("MANAGE SECURITY ENVIRONMENT", (byte)0x00, (byte)0x22);
-  }
+	}
 }
