@@ -315,12 +315,16 @@ public class Card extends PCSCBase {
 			card = new Card(ctx);
 			card.reconnect();
 			card.status();
-			card.transmit(bytes);
+			byte [] ret = card.transmit(bytes);
+			System.out.println(Util.binToHex(ret));
 			card.beginTransaction();
 			card.endTransaction();
 			
 			
-		} finally {
+		} catch (PCSCException pe) {
+			pe.printStackTrace();
+		}
+		finally {
 			if (null != card) {
 				card.disconnect();
 			}
