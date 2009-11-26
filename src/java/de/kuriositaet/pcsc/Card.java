@@ -7,6 +7,10 @@ import com.sun.jna.Memory;
 import com.sun.jna.NativeLong;
 import com.sun.jna.ptr.NativeLongByReference;
 
+
+
+
+import de.kuriositaet.iso7816.APDU;
 import de.kuriositaet.pcsc.ffi.Constants;
 import de.kuriositaet.pcsc.ffi.PCSC_FFI;
 
@@ -304,6 +308,10 @@ public class Card extends PCSCBase {
 		this.checkResult("Card.transmit()", result);
 		
 		return recvBuffer.getByteArray(0, bytesReceived.getValue().intValue());
+	}
+	
+	public byte[] transmit(APDU apdu) {
+		return transmit(apdu.getBytes());
 	}
 	
 	public static void main (String [] args) {
